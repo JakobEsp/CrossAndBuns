@@ -4,44 +4,60 @@
 
 @using CB.Data
 
-<h1>Website report checker</h1>
+@if (api == null || GetList == null) // if api is null or GetList is null
+{
+    <h1>Loading...</h1>
+}
+else
+{
+    <h1>Website report checker</h1> 
 
-   <table class="table">
-       <tbody>
+    <table class="table">
+        <tbody>
+            <div>
+                <input type="text" @bind="api.Domain" placeholder="google.com" />
+                <input type="text" @bind="api.Days" placeholder="90" />
+                <button class="btn btn-outline-light" @onclick="Search">Search</button>
+            </div>
+
             <tr>
                 <th>Domain</th>
                 <th>Days</th>
                 <th>Result</th>
             </tr>
-            @if (searched) 
+            @if (searched) // if the user has searched
             {
-                @foreach (API? get in GetList)
+                @foreach (API? get in GetList) // for each item in GetList
                 {
                     <tr>
-                        <td>@get.IP</td>
+                        <td>@string.Join(", ", get.IP)</td>
                         <td>@get.Days</td>
-                        <td>@get.Text</td>
+                        <td>
+                            @foreach (var text in get.Text) // for each item in get.Text, which is a list of strings
+                            {
+                                <div>@text</div>
+                            }
+                        </td>
                     </tr>
                 }
             }
-       </tbody>
-   </table>
+        </tbody>
+    </table>
+}
 
 @code {
-    bool searched = false;
-    API? api = new();
-    List<API>? GetList = new();
-
-    void Search()
+    bool searched = false; // if the user has searched, false by default
+    API? api; // api is null by default
+    protected override async Task OnInitializedAsync() // when the page is loaded
     {
-        searched = true;
-        GetList?.Add(Fetch.ApiReq(api));
+        api = new API(); // api is not null anymore
     }
-    /* Det her giver en "object reference not set to an instance of an object" fejl og ved ikke hvorfor
-    <div>
-    <input type="text" @bind="api.Domain" placeholder="google.com" />
-    <input type="text" @bind="api.Days" placeholder="90" />
-    <button class="btn btn-outline-light" @onclick="Search">Search</button>
-    </div>
-    */
+    List<API>? GetList = new(); // GetList is a list of API, which is null by default
+
+
+    void Search() // when the user clicks the search button
+    {
+        searched = true; // the user has searched, so searched is true
+        GetList?.Add(Fetch.ApiReq(api)); // add the result of the api request to GetList
+    }
 }

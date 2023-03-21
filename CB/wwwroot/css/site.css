@@ -6,7 +6,16 @@ html, body {
     background-color: #3c3e42 !important;
     color: whitesmoke !important;
 }
+.table {
+    color: whitesmoke !important;
+}
 
+.table input {
+    border-color: white;
+    color: whitesmoke !important;
+    margin-bottom: 2vh;
+    margin-right: 2vh;
+}
 h1:focus {
     outline: none;
 }
