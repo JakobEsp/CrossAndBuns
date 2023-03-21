@@ -4,9 +4,7 @@
 
 @using CB.Data
 
-<h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from a service.</p>
+<h1>Website report checker</h1>
 
 @if (GetList == null)
 {
@@ -16,18 +14,12 @@ else
 {
     <table class="table">
         <thead>
-            <tr>
-                <th>Website</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
         </thead>
         <tbody>
-            @foreach (dynamic get in GetList)
+            @foreach (API get in GetList)
             {
                 <tr>
-                    <td>@get</td>
+                    <td>@get.</td>
                 </tr>
             }
         </tbody>
@@ -35,6 +27,6 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
-    List<dynamic> GetList = API.FetchRequest();
+    API api = new();
+    List<API> GetList = API.FetchRequest();
 }
