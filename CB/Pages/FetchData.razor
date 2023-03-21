@@ -16,6 +16,11 @@ else
         <thead>
         </thead>
         <tbody>
+            <div>
+                <input type="text" @bind="api.Domain" placeholder="google.com" />
+                <input type="text" @bind="api.Days" placeholder="90" />
+                <button class="btn btn-outline-light" @onclick="Search">Add</button>
+            </div>
             @foreach (API get in GetList)
             {
                 <tr>
@@ -28,5 +33,11 @@ else
 
 @code {
     API api = new();
-    List<API> GetList = API.FetchRequest();
+    List<API> GetList = Fetch.ApiReq(api);
+
+    void Search()
+    {
+        GetList.Add(api);
+        api = new();
+    }
 }
