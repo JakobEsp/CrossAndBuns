@@ -9,7 +9,7 @@ namespace CB.Data
     {
         public static void GetIpUrl(API api)
         {
-            for (int i = 0; i < api.IP.Length; i++)
+            for (int i = 0; i < api.IP?.Length; i++)
             {
                 IPAddress addr = IPAddress.Parse(api.IP[i]);
                 // Print the ipaddress to the console, debug purposes
@@ -36,9 +36,9 @@ namespace CB.Data
         public static void GetUrlIp(API api)
         {
             // Create a new Uri object from the url
-            for (int i = 0; i < api.IP.Length; i++)
+            for (int i = 0; i < api.IP?.Length; i++)
             {
-                Uri myUri = new(api.Domain[i]);
+                Uri? myUri = new(api.Domain[i]);
                 // Get the IP addressArray from the Uri object
                 IPAddress[] ip = Dns.GetHostAddresses(myUri.Host); // I know it's kinda dumb this way, but yeah
                 // Print the IP addressArray to the console, debug purposes
@@ -50,7 +50,7 @@ namespace CB.Data
         public static API? ApiReq(API api)
         {
             GetUrlIp(api); // Get the IP address from the domain name
-            for (int i = 0; i < api.IP.Length; i++)
+            for (int i = 0; i < api.IP?.Length; i++)
             {
                 // Initialise a new RestSharp client to the API endpoint
                 RestClient client = new("https://api.abuseipdb.com/api/v2/check");

@@ -31,6 +31,9 @@ namespace CB.Data
 
         public API()
         {
+            IP = null;
+            Domain = null;
+            Days = null;
             Id = Interlocked.Increment(ref _id);
         }
 

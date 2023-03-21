@@ -34,11 +34,9 @@
    </table>
 
 @code {
+
     API api = new();
     List<API>? GetList = new();
 
-    void Search()
-    {
-        GetList?.Add(Fetch.ApiReq(api));
-    }
+    void Search() => GetList?.Add(Fetch.ApiReq(api));
 }
