@@ -1,43 +1,44 @@
 ﻿@page "/fetchdata"
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle></PageTitle>
 
 @using CB.Data
 
 <h1>Website report checker</h1>
 
-@if (GetList == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-        </thead>
-        <tbody>
-            <div>
-                <input type="text" @bind="api.Domain" placeholder="google.com" />
-                <input type="text" @bind="api.Days" placeholder="90" />
-                <button class="btn btn-outline-light" @onclick="Search">Add</button>
-            </div>
-            @foreach (API get in GetList)
+
+   <table class="table">
+       <tbody>
+           <div>
+               <input type="text" @bind="api.Domain" placeholder="google.com" />
+               <input type="text" @bind="api.Days" placeholder="90" />
+               <button class="btn btn-outline-light" @onclick="Search">Search</button>
+           </div>
+            <tr>
+                <th>Domain</th>
+                <th>Days</th>
+                <th>Result</th>
+            </tr>
+            @if (GetList != null) 
             {
-                <tr>
-                    <td>@get.</td>
-                </tr>
+                @foreach (API get in GetList)
+                {
+                    <tr>
+                        <td>@get.IP</td>
+                        <td>@get.Days</td>
+                        <td>@get.Text</td>
+                    </tr>
+                }
             }
-        </tbody>
-    </table>
-}
+       </tbody>
+   </table>
 
 @code {
     API api = new();
-    List<API> GetList = Fetch.ApiReq(api);
+    List<API>? GetList = new();
 
     void Search()
     {
-        GetList.Add(api);
-        api = new();
+        GetList?.Add(Fetch.ApiReq(api));
     }
 }
