@@ -1,7 +1,10 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Courier New, Courier, monospace !important;
+    user-select: none !important;
+    background-color: #3c3e42 !important;
+    color: whitesmoke !important;
 }
 
 h1:focus {

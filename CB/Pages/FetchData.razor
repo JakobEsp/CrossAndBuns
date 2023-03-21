@@ -9,19 +9,14 @@
 
    <table class="table">
        <tbody>
-           <div>
-               <input type="text" @bind="api.Domain" placeholder="google.com" />
-               <input type="text" @bind="api.Days" placeholder="90" />
-               <button class="btn btn-outline-light" @onclick="Search">Search</button>
-           </div>
             <tr>
                 <th>Domain</th>
                 <th>Days</th>
                 <th>Result</th>
             </tr>
-            @if (GetList != null) 
+            @if (searched) 
             {
-                @foreach (API get in GetList)
+                @foreach (API? get in GetList)
                 {
                     <tr>
                         <td>@get.IP</td>
@@ -31,12 +26,25 @@
                 }
             }
        </tbody>
+
+
    </table>
 
 @code {
-
-    API api = new();
+    bool searched = false;
+    API? api = new();
     List<API>? GetList = new();
 
-    void Search() => GetList?.Add(Fetch.ApiReq(api));
+    void Search()
+    {
+        searched = true;
+        GetList?.Add(Fetch.ApiReq(api));
+    }
+    /*
+    <div>
+    <input type="text" @bind="api.Domain" placeholder="google.com" />
+    <input type="text" @bind="api.Days" placeholder="90" />
+    <button class="btn btn-outline-light" @onclick="Search">Search</button>
+    </div>
+    */
 }
