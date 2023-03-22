@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using RestSharp;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net;
@@ -11,7 +11,7 @@ namespace CB.Data
         public static void GetUrlIp(API api)
         {
             // Initialise a new Uri object from the domain name
-            Uri myUri = new(api.Domain);
+            Uri myUri = new(api.Domain); 
             // Get the IP address from the domain name
             IPHostEntry host = Dns.GetHostEntry(myUri.Host);
             // Foreach IP address in the host entry

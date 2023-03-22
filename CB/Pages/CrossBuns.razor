@@ -1,0 +1,35 @@
+@page "/crossbuns"
+
+@using CB.Data
+@using CB.Pages
+
+<PageTitle>J & S</PageTitle>
+
+<thead>
+    <h1>Jakob & Sebastian</h1>
+</thead>
+<tbody>
+ <div class="game-board">
+    @for (int i = 0; i < 9; i++)
+    {
+        cellBoxes.Add(new(i, true));
+            <div class="box" data-set=@true @onclick="ChangePlayer">@cellBoxes[i].Value</div>
+    }
+  </div>
+</tbody>
+
+
+@code {
+    Player player = new();
+    bool ChoosePlayer = true;
+    List<CellBox> cellBoxes = new List<CellBox>();
+    Player player1 = new Player();
+    Player player2 = new Player();
+
+    private async Task ChangePlayer()
+    {
+        player = ChoosePlayer ? player1 : player2;
+        ChoosePlayer = !ChoosePlayer;
+        Console.WriteLine("deez");
+    }
+}
