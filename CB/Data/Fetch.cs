@@ -2,6 +2,7 @@
 using RestSharp;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net;
+using System.Net.Sockets;
 using System;
 
 namespace CB.Data
@@ -17,6 +18,11 @@ namespace CB.Data
             // Foreach IP address in the host entry
             foreach (IPAddress ip in host.AddressList)
             {
+                if (ip.AddressFamily != AddressFamily.InterNetwork)
+                {
+                    continue;
+                }
+
                 // Check if api.ip list does not contains the current ip
                 if (!api.IP.Contains(ip))
                 {
@@ -60,7 +66,7 @@ namespace CB.Data
                 if (response != null)
                 {
                     // Add the response content to the dynamic list
-                    api.Text.Add(JsonConvert.DeserializeObject<dynamic>(response.Content));
+                    api.Text.Add(JsonConvert.DeserializeObject<Parser?>(response.Content));
                 }
             }
             // Return our object

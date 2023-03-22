@@ -15,30 +15,38 @@ else
     <table class="table">
         <tbody>
             <div>
-                <input type="text" @bind="api.Domain" placeholder="google.com" />
-                <input type="text" @bind="api.Days" placeholder="90" />
+                <input type="text" @bind="api.Domain" placeholder="https://google.com..." />
+                <input type="text" @bind="api.Days" placeholder="days..." />
                 <button class="btn btn-outline-light" @onclick="Search">Search</button>
             </div>
 
             <tr>
-                <th>Domain</th>
+                <th>IP</th>
                 <th>Days</th>
                 <th>Result</th>
             </tr>
+
             @if (searched) // if the user has searched
             {
                 @foreach (API? get in GetList) // for each item in GetList
                 {
-                    <tr>
-                        <td>@string.Join(", ", get.IP)</td>
-                        <td>@get.Days</td>
-                        <td>
-                            @foreach (var text in get.Text) // for each item in get.Text, which is a list of strings
+                   
+                    @for (int i = 0; i < get.IP.Count; i++)
+                    { 
+                        <tr>
+                            <td class="split">@get.IP[i]</td>
+                            <td class="split rightline">@get.Days</td>
+                            @foreach (Parser text in get.Text) // Fuck this foreach loop
                             {
-                                <div>@text</div>
+                                <td class="topline">Public: @text.isPublic</td>
+                                <br />
+                                <td class="split topline">Total Reports: @text.totalReports</td>
+                                <br />
+                                <td class="split topline rightline">Distinct user reports: @text.DistUsers</td>
+                                break;
                             }
-                        </td>
                     </tr>
+                    }
                 }
             }
         </tbody>

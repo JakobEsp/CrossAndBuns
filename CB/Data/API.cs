@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using CB.Data;
+using System.Net;
 
 public class API
 {
@@ -9,7 +10,7 @@ public class API
     // Create a string domain field
     public string? Domain { get; set; } 
     // Create a dynamic list 
-    public List<dynamic> Text { get; set; } = new();
+    public List<Parser> Text { get; set; } = new();
     // Create a string days field
     private string? days { get; set; }
     // Create a string days property

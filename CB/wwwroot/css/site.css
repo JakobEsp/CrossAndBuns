@@ -16,6 +16,20 @@ html, body {
     margin-bottom: 2vh;
     margin-right: 2vh;
 }
+
+.split {
+    border-left: 1px solid whitesmoke !important;
+}
+
+.topline {
+    border-top: 1px solid whitesmoke !important;
+}
+
+.rightline {
+    border-right: 1px solid whitesmoke !important;
+}
+
+
 h1:focus {
     outline: none;
 }
