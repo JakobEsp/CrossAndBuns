@@ -3,23 +3,30 @@ using System.Text.Json.Serialization;
 
 namespace CB.Data
 {
+    /*
+     * Vi prøvede at få fat i div. properties fra json filen
+     * Efter mange forsøg måtte vi forgæves opgive
+     * Du kan se her hvordan vi opstillede vores klasser
+    */
     public class Parser
     {
-        [JsonPropertyName("isPublic")]
+        [JsonProperty("isPublic")]
         public bool isPublic { get; set; }
-
-        [JsonPropertyName("hostnames")]
+        [JsonProperty("hostnames")]
         public string? hostnames { get; set; }
-
-        [JsonPropertyName("isp")]
-        public string? isp { get; set; }
-
-        [JsonPropertyName("totalReports")]
+        [JsonProperty("totalReports")]
         public int totalReports { get; set; }
 
-        [JsonPropertyName("numDistinctUsers")]
-        public int DistUsers { get; set; }
+        public int numDistinctUsers { get; set; }
 
+    }
+    public class ParseList
+    {
+        public List<Parser> parsers { get; set; } = new();
 
+    }
+    public class Root
+    {
+        public ParseList parse { get; set; }
     }
 }

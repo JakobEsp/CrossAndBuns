@@ -4,6 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Net;
 using System.Net.Sockets;
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace CB.Data
 {
@@ -18,9 +19,11 @@ namespace CB.Data
             // Foreach IP address in the host entry
             foreach (IPAddress ip in host.AddressList)
             {
+                // Check if the address family is not inter network (ipv4)
                 if (ip.AddressFamily != AddressFamily.InterNetwork)
                 {
                     continue;
+                    // Find ipv4
                 }
 
                 // Check if api.ip list does not contains the current ip
@@ -65,8 +68,8 @@ namespace CB.Data
                 // Check if response isn't null
                 if (response != null)
                 {
-                    // Add the response content to the dynamic list
-                    api.Text.Add(JsonConvert.DeserializeObject<Parser?>(response.Content));
+                    // Add the response content to the JObject list
+                    api.Text = JObject.Parse(response.Content);
                 }
             }
             // Return our object
